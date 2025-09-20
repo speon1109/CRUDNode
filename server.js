@@ -1,5 +1,5 @@
 import express from 'express';
-import { resForErrors, resForSuccess } from './helpers';
+import { resForErrors, resForSuccess } from './helpers.js';
 const server= express();
 server.use(express.json());
 //tasks array
