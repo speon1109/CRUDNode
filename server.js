@@ -61,9 +61,21 @@ server.put('/tasks/:id',(req,res)=>{
     }
     index.title= title;
     index.completed= completed;
-    res.status(201).json({message: "Sucessful, bruh.", task: index})
+    res.status(200).json({message: "Sucessful, bruh.", task: index})
 });
+//end of put
 
+server.patch('/tasks/:id',(req,res)=>{
+    const id= Number(req.params.id);
+    const index= tasks.find((key)=> key.id===id);
+    if(!index){
+        return res.status(404).json({message:`Id: ${id} can't be found.`});
+    }
+    const {title, completed}= req.body;
+    if(title!==undefined) index.title= title;
+    if(completed!==undefined) index.completed= completed;
+    res.status(200).json({message: "Patched successfully",task: index});
+});
 //server activation
 server.listen(3000,()=>{
     console.log("Running on port 3000 now.");
