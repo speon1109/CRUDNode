@@ -9,6 +9,11 @@ const tasks = [
 //end of tasks array
 
 let newId= tasks.length ? tasks[tasks.length-1].id+1:1; //formula for newId
+//helper functions
+
+
+//end of helper functions
+
 
 //get all
 server.get('/tasks',(req,res)=>{
