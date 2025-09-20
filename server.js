@@ -65,6 +65,7 @@ server.put('/tasks/:id',(req,res)=>{
 });
 //end of put
 
+//patch
 server.patch('/tasks/:id',(req,res)=>{
     const id= Number(req.params.id);
     const index= tasks.find((key)=> key.id===id);
@@ -74,8 +75,18 @@ server.patch('/tasks/:id',(req,res)=>{
     const {title, completed}= req.body;
     if(title!==undefined) index.title= title;
     if(completed!==undefined) index.completed= completed;
-    res.status(200).json({message: "Patched successfully",task: index});
+    return res.status(200).json({message: "Patched successfully",task: index});
 });
+//end of patch
+
+server.delete('/tasks/:id',(req,res)=>{
+    const id= Number(req.params.id);
+    const index= tasks.findIndex((key)=>key.id===id);
+    if(index===-1) return res.status(404).json({message:"Not found."});
+    const deletedTask= tasks.splice(index,1)[0];
+    return res.status(200).json({message:"Successful.", task: deletedTask});
+});
+
 //server activation
 server.listen(3000,()=>{
     console.log("Running on port 3000 now.");
